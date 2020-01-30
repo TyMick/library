@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- prettier-ignore -->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/da632478-1952-40a7-95cc-419304bb72bc%2Ffavicon.ico?v=1580343871395" type="image/x-icon">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/default.min.css" />
+
+    <title>Personal library – Ty Mick</title>
+  </head>
+
+  <body style="background-color: #dee2e6;">
+    <div class="container my-5">
+      <h1 class="mb-4">Personal library microservice</h1>
+
+      <!-- API test front end -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h4 class="mb-3">Test this API:</h4>
+
+          <!-- Add a new book -->
+          <form id="addBook" class="mb-4">
+            <h5>Add a new book</h5>
+
+            <div class="form-row">
+              <div
+                class="col-md mr-md-3 mb-1 mb-md-0"
+                style="max-width: 7.5rem;"
+              >
+                <label for="addBookUrl" class="sr-only">API URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="addBookUrl"
+                  value="/api/books"
+                  disabled
+                />
+              </div>
+              <label for="addTitle" class="col-md-auto col-form-label"
+                >Title</label
+              >
+              <div
+                class="col-md mb-3 mb-md-0 mr-md-3"
+                style="max-width: 20rem;"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="addTitle"
+                  name="title"
+                />
+              </div>
+              <div class="col-md-auto">
+                <button type="submit" class="btn btn-primary">POST</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- List all books -->
+          <form id="getAllBooks" class="mb-4">
+            <h5>List all books</h5>
+
+            <div class="form-row">
+              <div class="col mr-1 mr-sm-3" style="max-width: 7.5rem;">
+                <label for="getBooksUrl" class="sr-only">API URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="getBooksUrl"
+                  value="/api/books"
+                  disabled
+                />
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary">GET</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Delete all books -->
+          <form id="deleteAllBooks" class="mb-4">
+            <h5>Delete all books</h5>
+
+            <div class="form-row">
+              <label for="deleteBooksUrl" class="sr-only">API URL</label>
+              <div class="col mr-1 mr-sm-3" style="max-width: 7.5rem;">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="deleteBooksUrl"
+                  value="/api/books"
+                  disabled
+                />
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary">DELETE</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Add a comment to a book -->
+          <form id="addComment" class="mb-4">
+            <h5>Add a comment to a book</h5>
+
+            <div class="form-row">
+              <div
+                class="col-lg mr-lg-3 mb-1 mb-lg-0"
+                style="max-width: 23.5rem;"
+              >
+                <label for="postId" class="sr-only"
+                  >Book <code>_id</code></label
+                >
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">/api/books/</div>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="postId"
+                    name="_id"
+                    placeholder="_id"
+                  />
+                </div>
+              </div>
+              <label for="postComment" class="col-lg-auto col-form-label"
+                >Comment</label
+              >
+              <div class="col-lg mb-3 mb-lg-0 mr-lg-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="postComment"
+                  name="comment"
+                />
+              </div>
+              <div class="col-lg-auto">
+                <button type="submit" class="btn btn-primary">POST</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Show one book -->
+          <form id="getOneBook" class="mb-4">
+            <h5>Show one book, with comments</h5>
+
+            <div class="form-row">
+              <div
+                class="col-sm mr-1 mr-sm-3 mb-3 mb-sm-0"
+                style="max-width: 23.5rem;"
+              >
+                <label for="getId" class="sr-only">Book <code>_id</code></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">/api/books/</div>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="getId"
+                    name="_id"
+                    placeholder="_id"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-auto">
+                <button type="submit" class="btn btn-primary">GET</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Delete a book -->
+          <form id="deleteBook">
+            <h5>Delete a book</h5>
+
+            <div class="form-row">
+              <div
+                class="col-sm mr-1 mr-sm-3 mb-3 mb-sm-0"
+                style="max-width: 23.5rem;"
+              >
+                <label for="deleteId" class="sr-only"
+                  >Book <code>_id</code></label
+                >
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">/api/books/</div>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="deleteId"
+                    name="_id"
+                    placeholder="_id"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-auto">
+                <button type="submit" class="btn btn-primary">GET</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- API output -->
+          <div
+            class="modal fade"
+            id="apiOutputModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="apiOutputLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="apiOutputLabel">
+                    API response
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <pre id="apiOutput" class="hljs bg-white mb-0"></pre>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Explanation -->
+      <p class="lead font-italic">
+        View the source on
+        <a href="https://github.com/tywmick/library">GitHub</a> or
+        <a href="https://glitch.com/edit/#!/ty-library">Glitch</a>.
+      </p>
+
+      <p>
+        I created this microservice in fulfillment of
+        <a href="https://freecodecamp.org">freeCodeCamp</a>'s Information
+        Security and Quality Assurance Project
+        <a
+          href="https://www.freecodecamp.org/learn/information-security-and-quality-assurance/information-security-and-quality-assurance-projects/personal-library"
+          >Personal Library</a
+        >, using <a href="https://nodejs.org/en/">Node.js</a>,
+        <a href="https://expressjs.com/">Express</a>,
+        <a href="https://mongodb.github.io/node-mongodb-native/">MongoDB</a>,
+        <a href="https://www.chaijs.com/">Chai</a>, and
+        <a href="https://helmetjs.github.io/">Helmet</a>. The front end API
+        tests on the home page also use
+        <a href="https://getbootstrap.com/">Bootstrap</a>,
+        <a href="https://jquery.com/">jQuery</a>, and
+        <a href="https://highlightjs.org/">highlight.js</a>.
+      </p>
+
+      <p>
+        You can read the functional tests I wrote on
+        <a
+          href="https://github.com/tywmick/library/tree/glitch/tests/2_functional-tests.js"
+          >GitHub</a
+        >
+        or
+        <a
+          href="https://glitch.com/edit/#!/ty-library?path=tests/2_functional-tests.js"
+          >Glitch</a
+        >. To run the tests yourself, create a MongoDB database, fork/remix this
+        project, create a <code>.env</code> file with
+        <code>DB="{your MongoDB URI}"</code> and <code>NODE_ENV="test"</code>,
+        start the server, and look at the server console logs.
+      </p>
+
+      <p>This project fulfills the following user stories:</p>
+
+      <ol>
+        <li>
+          Nothing from my website will be cached in my client as a security
+          measure.
+        </li>
+        <li>
+          I will see that the site is powered by <code>"PHP 4.2.0"</code> even
+          though it isn't as a security measure.
+        </li>
+        <li>
+          I can <b>post</b> a <code>title</code> to <code>/api/books</code> to
+          add a book and returned will be the object with the
+          <code>title</code> and a unique <code>_id</code>.
+        </li>
+        <li>
+          I can <b>get</b> <code>/api/books</code> to retrieve an aray of all
+          books containing <code>title</code>, <code>_id</code>, &amp;
+          <code>commentcount</code>.
+        </li>
+        <li>
+          I can <b>get</b> <code>/api/books/{_id}</code> to retrieve a single
+          object of a book containing <code>title</code>, <code>_id</code>,
+          &amp; an array of <code>comments</code> (empty array if no comments
+          present).
+        </li>
+        <li>
+          I can <b>post</b> a <code>comment</code> to
+          <code>/api/books/{_id}</code> to add a comment to a book and returned
+          will be the books object similar to <b>get</b>
+          <code>/api/books/{_id}</code>.
+        </li>
+        <li>
+          I can <b>delete</b> <code>/api/books/{_id}</code> to delete a book
+          from the collection. Returned will be
+          <code>"delete successful"</code> if successful.
+        </li>
+        <li>
+          If I try to request a book that doesn't exist I will get a
+          <code>"no book exists"</code> message.
+        </li>
+        <li>
+          I can send a <b>delete</b> request to <code>/api/books</code> to
+          delete all books in the database. Returned will be
+          <code>"complete delete successful"</code> if successful.
+        </li>
+        <li>All 6 functional tests required are complete and passing.</li>
+      </ol>
+    </div>
+
+    <!-- Glitch button -->
+    <div
+      class="glitchButton"
+      style="position:absolute;top:20px;right:20px;"
+    ></div>
+    <script src="https://button.glitch.me/button.js"></script>
+
+    <!-- prettier-ignore -->
+    <span>
+      <!-- jQuery -->
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <!-- Popper -->
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <!-- Bootstrap -->
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>      
+      <!-- highlight.js -->
+      <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+    </span>
+
+    <!-- Page scripts -->
+    <script type="text/javascript" src="/public/client.js"></script>
+  </body>
+</html>
