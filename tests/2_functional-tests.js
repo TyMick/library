@@ -149,5 +149,18 @@ suite("Functional Tests", function() {
         });
       }
     );
+
+    suite("Clean up", function() {
+      test("Test DELETE /api/books/[id]", function(done) {
+        chai
+          .request(server)
+          .delete("/api/books/" + id1)
+          .end((err, res) => {
+            assert.strictEqual(res.status, 200);
+            assert.strictEqual(res.text, "delete successful");
+            done();
+          });
+      });
+    });
   });
 });

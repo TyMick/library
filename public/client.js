@@ -7,57 +7,105 @@ $(function() {
 
   $("#addBook").submit(function() {
     event.preventDefault();
+    $("button").attr("disabled", true);
+    $("button", this).html(
+      '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>'
+    );
     $.ajax({
       url: "/api/books",
       type: "post",
       data: { title: $("#addTitle").val() },
-      success: displayResult
+      success: function(data) {
+        displayResult(data);
+        $("#addBook button").html("POST");
+        $("button").removeAttr("disabled");
+      }
     });
   });
 
   $("#getAllBooks").submit(function() {
     event.preventDefault();
+    $("button").attr("disabled", true);
+    $("button", this).html(
+      '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>'
+    );
     $.ajax({
       url: "/api/books",
       type: "get",
-      success: displayResult
+      success: function(data) {
+        displayResult(data);
+        $("#getAllBooks button").html("GET");
+        $("button").removeAttr("disabled");
+      }
     });
   });
 
   $("#deleteAllBooks").submit(function() {
     event.preventDefault();
+    $("button").attr("disabled", true);
+    $("button", this).html(
+      '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>'
+    );
     $.ajax({
       url: "/api/books",
       type: "delete",
-      success: displayResult
+      success: function(data) {
+        displayResult(data);
+        $("#deleteAllBooks button").html("DELETE");
+        $("button").removeAttr("disabled");
+      }
     });
   });
 
   $("#addComment").submit(function() {
     event.preventDefault();
+    $("button").attr("disabled", true);
+    $("button", this).html(
+      '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>'
+    );
     $.ajax({
       url: "/api/books/" + $("#postId").val(),
       type: "post",
       data: { comment: $("#postComment").val() },
-      success: displayResult
+      success: function(data) {
+        displayResult(data);
+        $("#addComment button").html("POST");
+        $("button").removeAttr("disabled");
+      }
     });
   });
 
   $("#getOneBook").submit(function() {
     event.preventDefault();
+    $("button").attr("disabled", true);
+    $("button", this).html(
+      '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>'
+    );
     $.ajax({
       url: "/api/books/" + $("#getId").val(),
       type: "get",
-      success: displayResult
+      success: function(data) {
+        displayResult(data);
+        $("#getOneBook button").html("GET");
+        $("button").removeAttr("disabled");
+      }
     });
   });
 
   $("#deleteBook").submit(function() {
     event.preventDefault();
+    $("button").attr("disabled", true);
+    $("button", this).html(
+      '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>'
+    );
     $.ajax({
       url: "/api/books/" + $("#deleteId").val(),
       type: "delete",
-      success: displayResult
+      success: function(data) {
+        displayResult(data);
+        $("#deleteBook button").html("DELETE");
+        $("button").removeAttr("disabled");
+      }
     });
   });
 });
